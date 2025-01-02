@@ -1,74 +1,66 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 const QuadroCarrossel = () => {
   const carouselRef = useRef(null);
-  const nextButtonRef = useRef(null);
-  const prevButtonRef = useRef(null);
-  const currentIndex = useRef(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const carouselItems = [
+    '/quadro1.jpeg',
+    '/quadro7.jpg',
+    '/quadro8.jpg',
+    '/HomenagemAniversario.jpg',
+    '/BiscuitVarios.jpg'
+  ];
+
+  const showItem = (index) => {
+    const items = carouselRef.current.querySelectorAll('[data-carousel-item]');
+    items.forEach((item, i) => {
+      item.classList.add('hidden');
+      if (i === index) {
+        item.classList.remove('hidden');
+      }
+    });
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselItems.length);
+  };
+
+  const goToPrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + carouselItems.length) % carouselItems.length);
+  };
 
   useEffect(() => {
-    const carouselItems = carouselRef.current.querySelectorAll('[data-carousel-item]');
-    const showItem = (index) => {
-      carouselItems.forEach((item, i) => {
-        item.classList.add('hidden');
-        if (i === index) {
-          item.classList.remove('hidden');
-        }
-      });
-    };
-
-    const goToNext = () => {
-      currentIndex.current = (currentIndex.current + 1) % carouselItems.length;
-      showItem(currentIndex.current);
-    };
-
-    const goToPrev = () => {
-      currentIndex.current =
-        (currentIndex.current - 1 + carouselItems.length) % carouselItems.length;
-      showItem(currentIndex.current);
-    };
-
-    nextButtonRef.current.addEventListener('click', goToNext);
-    prevButtonRef.current.addEventListener('click', goToPrev);
-
-    // Exibir o primeiro item inicialmente
-    showItem(currentIndex.current);
-
-    return () => {
-      nextButtonRef.current.removeEventListener('click', goToNext);
-      prevButtonRef.current.removeEventListener('click', goToPrev);
-    };
-  }, []);
+    showItem(currentIndex);
+  }, [currentIndex]);
 
   return (
     <div id="gallery" className="relative w-full" data-carousel="slide" ref={carouselRef}>
       <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-        {['/quadro1.jpeg', '/quadro7.jpg', '/quadro8.jpg', '/HomenagemAniversario.jpg', '/BiscuitVarios.jpg'].map(
-          (src, index) => (
-            <div
-              key={index}
-              className="hidden duration-700 ease-in-out"
-              data-carousel-item
-            >
-              <Image
-                src={src}
-                alt={`Imagem ${index + 1}`}
-                className="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                width={400}
-                height={400}
-              />
-            </div>
-          )
-        )}
+        {carouselItems.map((src, index) => (
+          <div
+            key={index}
+            className={`duration-700 ease-in-out ${index === currentIndex ? '' : 'hidden'}`}
+            data-carousel-item
+          >
+            <Image
+              src={src}
+              alt={`Imagem ${index + 1}`}
+              className="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              width={400}
+              height={400}
+            />
+          </div>
+        ))}
       </div>
 
       {/* Botão Anterior */}
       <button
-        ref={prevButtonRef}
         type="button"
+        onClick={goToPrev}
         className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
         data-carousel-prev
       >
@@ -93,8 +85,8 @@ const QuadroCarrossel = () => {
 
       {/* Botão Próximo */}
       <button
-        ref={nextButtonRef}
         type="button"
+        onClick={goToNext}
         className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
         data-carousel-next
       >
