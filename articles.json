@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Obra Destaque Luiz Gonzaga",
+    "text": [
+      "A obra foi exibida com destaque no mural da escola EMEIEF Professora Etiene Sales Campelo, apresentando uma representação marcante de Luiz Gonzaga.Com maestria, o trabalho capturou a essência do 'Rei do Baião', sintetizando os ritmos nordestinos em uma releitura vibrante da cultura popular."
+    ],
+    "image": "/quadro1.jpeg",
+    "alt": "Obra Destaque 2021: Luiz Gonzaga",
+    "tags": [
+      "Baião",
+      "Destaque 2021"
+    ]
+  },
+  {
+    "title": "Modelagem com Biscuit",
+    "text": [
+      "Isabella explorou a arte de criar miniaturas detalhadas com biscuit. Entre suas criações está uma réplica em miniatura de sua mãe, feita com todo carinho e precisão, destacando sua criatividade e habilidade artesanal."
+    ],
+    "image": "/quadro7.jpg",
+    "alt": "Modelagem com Biscuit",
+    "tags": [
+      "artesanato",
+      "criatividade"
+    ]
+  },
+  {
+    "title": "Arte e História",
+    "text": [
+      "Inspirada na obra de Tarsila do Amaral, Estrada de Ferro Central do Brasil (1924), Isabella usou sua curiosidade e talento para criar um quadro que simboliza um momento marcante da história brasileira: a Revolução de 1924."
+    ],
+    "image": "/quadro8.jpg",
+    "alt": "Arte e História: Revolução de 1924",
+    "tags": [
+      "Arte",
+      "História"
+    ]
+  }
+]
