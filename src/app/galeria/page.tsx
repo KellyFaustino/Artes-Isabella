@@ -2,7 +2,7 @@
 
 import Rodape from '@/components/Rodape/Rodape'
 import Header from '../../components/Header/Header'
-import QuadroCarrossel from '../../components/Quadros/Quadros'
+import QuadroCarrossel from '../../components/Carrossel/Carrossel'
 
 const Galeria = () => {
   const user = { name: 'Kelly Faustino' }

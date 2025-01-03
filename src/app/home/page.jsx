@@ -1,6 +1,6 @@
 'use client'
-import data from '../../../articles.json'
-import Article from '../../components/Article/Article'
+import data from '../../../artigos.json'
+import Article from '../../components/DestaqueArtigo/DestaqueArtigo'
 import Header from '../../components/Header/Header'
 import Link from 'next/link'
 import Rodape from '../../components/Rodape/Rodape'

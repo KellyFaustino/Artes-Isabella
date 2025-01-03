@@ -1,15 +1,16 @@
 import { useState } from 'react'
+import { FaChevronDown } from 'react-icons/fa'
 import ToggleTheme from '../../components/ToggleTheme/ToggleTheme'
 import Link from 'next/link'
 import Image from 'next/image'
-import Modal from '../../components/Modal/Modal'
 
 const Header = ({ user }) => {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [isModalOpen, setModalOpen] = useState(false)
+  const [menuVisible, setMenuVisible] = useState(false)
+  const toggleMenu = () => setMenuVisible(!menuVisible)
 
   return (
-    <header className="flex h-24 bg-bella-200 dark:bg-dark-200 justify-between items-center px-5 sm:rounded-xl sm:m-5">
+    <header className="relative flex h-24 bg-bella-200 dark:bg-dark-200 justify-between items-center px-5 sm:rounded-xl sm:m-5">
       <div className="flex flex-col items-start">
         {user?.name ? (
           <div className="flex items-center space-x-3">
@@ -23,12 +24,37 @@ const Header = ({ user }) => {
             <span className="text-gray-100 font-medium">
               Bem-vindo, {user.name}
             </span>
+
+            <button
+              className="text-gray-100 ml-3 p-1 rounded-full hover:bg-gray-200 transition duration-300"
+              onClick={toggleMenu}
+              aria-label="Abrir menu"
+            >
+              <FaChevronDown />
+            </button>
+
+            {menuVisible && (
+              <div
+                className="absolute left-16 top-12 w-40 bg-white dark:bg-dark-200 border border-gray-300 dark:border-dark-400 rounded-lg shadow-lg transition-all duration-300 ease-in-out p-3"
+                aria-live="polite"
+              >
+                <button
+                  onClick={() => alert('Saindo...')}
+                  className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg transition duration-200"
+                >
+                  Sair
+                </button>
+                <button
+                  onClick={() => alert('Abrindo configurações...')}
+                  className="block w-full text-left px-4 py-2 text-blue-600 hover:bg-gray-100 dark:hover:bg-dark-300 rounded-lg transition duration-200"
+                >
+                  Configurações
+                </button>
+              </div>
+            )}
           </div>
         ) : (
-          <button
-            className="text-gray-300 text-sm underline"
-            onClick={() => setModalOpen(true)}
-          >
+          <button className="text-gray-300 text-sm underline">
             Faça seu login ou cadastro
           </button>
         )}
@@ -38,7 +64,6 @@ const Header = ({ user }) => {
         Exposição de Artes de Isabella Faustino de Moura
       </h1>
 
-      {/* Botão de menu (somente para dispositivos pequenos) */}
       <button
         className="text-gray-100 sm:hidden"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -70,11 +95,8 @@ const Header = ({ user }) => {
             </Link>
           </li>
         </ul>
-
         <ToggleTheme />
       </nav>
-
-      {isModalOpen && <Modal onClose={() => setModalOpen(false)} />}
     </header>
   )
 }

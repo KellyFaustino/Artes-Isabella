@@ -1,184 +1,173 @@
-import React from 'react'
+"use client";
+
+import React from "react";
+import { useRouter } from "next/navigation";
+import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+
+const InputField = ({
+  id,
+  type,
+  name,
+  value,
+  onChange,
+  placeholder,
+  icon: Icon,
+}) => (
+  <div className="relative">
+    <label
+      htmlFor={id}
+      className="block text-sm font-medium text-gray-700 mb-2"
+    >
+      {placeholder}
+    </label>
+    <div className="flex items-center bg-white rounded-lg shadow-lg p-3 focus-within:ring-2 focus-within:ring-blue-300 transition">
+      {Icon && <Icon className="text-gray-400 mr-3" size={20} />}
+      <input
+        type={type}
+        id={id}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="w-full bg-transparent text-gray-900 focus:outline-none"
+        required
+      />
+    </div>
+  </div>
+);
 
 const Form = ({ onSubmit }) => {
   const [formData, setFormData] = React.useState({
-    firstName: '',
-    lastName: '',
-    phone: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    Name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
     agree: false,
-  })
+  });
+
+  const router = useRouter();
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prevData) => ({ ...prevData, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleCheckboxChange = (e) => {
-    setFormData((prevData) => ({ ...prevData, agree: e.target.checked }))
-  }
+    setFormData((prevData) => ({ ...prevData, agree: e.target.checked }));
+  };
 
   const safeSubmit = (event) => {
-    event.preventDefault()
-    const { password, confirmPassword, agree } = formData
+    event.preventDefault();
+    const { password, confirmPassword, agree } = formData;
     if (password !== confirmPassword) {
-      alert('As senhas não coincidem!')
-      return
+      alert("As senhas não coincidem!");
+      return;
     }
     if (!agree) {
-      alert('Você deve concordar com os termos e condições.')
-      return
+      alert("Você deve concordar com os termos e condições.");
+      return;
     }
+    onSubmit(formData);
+  };
 
-    onSubmit(formData)
-  }
+  const handleBack = () => {
+    router.push("/login");
+  };
 
   return (
-    <form
-      onSubmit={safeSubmit}
-      className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg"
-    >
-      <div className="grid gap-6 mb-6 md:grid-cols-2">
-        <div>
-          <label
-            htmlFor="first_name"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
-            Primeiro nome
-          </label>
-          <input
-            type="text"
-            id="first_name"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-            placeholder="Primeiro Nome"
-            required
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="last_name"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
-            Sobrenome
-          </label>
-          <input
-            type="text"
-            id="last_name"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-            placeholder="Sobrenome"
-            required
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="phone"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
-            Número de telefone
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-            placeholder="Telefone"
-            required
-          />
-        </div>
+    <div className="h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 via-lavender-100 to-blue-200 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-5 left-20 w-40 h-40 bg-gradient-to-br from-mint to-blue-100 opacity-40 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-5 right-20 w-52 h-52 bg-gradient-to-br from-pastel-blue to-lavender opacity-30 blur-2xl animate-pulse-slow"></div>
       </div>
-      <div className="mb-6">
-        <label
-          htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900"
-        >
-          Endereço de e-mail
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-          placeholder="email"
-          required
-        />
-      </div>
-      <div className="mb-6">
-        <label
-          htmlFor="password"
-          className="block mb-2 text-sm font-medium text-gray-900"
-        >
-          Senha
-        </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-          placeholder="Senha"
-          required
-        />
-      </div>
-      <div className="mb-6">
-        <label
-          htmlFor="confirm_password"
-          className="block mb-2 text-sm font-medium text-gray-900"
-        >
-          Confirmar senha
-        </label>
-        <input
-          type="password"
-          id="confirm_password"
-          name="confirmPassword"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-          placeholder="Confirma Senha"
-          required
-        />
-      </div>
-      <div className="flex items-start mb-6">
-        <input
-          id="remember"
-          type="checkbox"
-          value=""
-          checked={formData.agree}
-          onChange={handleCheckboxChange}
-          className="w-4 h-4 border border-gray-300 rounded bg-gray-50"
-          required
-        />
-        <label
-          htmlFor="remember"
-          className="ms-2 text-sm font-medium text-gray-900"
-        >
-          Eu concordo com os{' '}
-          <a href="#" className="text-blue-600 hover:underline">
-            termos e condições
-          </a>
-          .
-        </label>
-      </div>
-      <button
-        type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-      >
-        Enviar
-      </button>
-    </form>
-  )
-}
 
-export default Form
+      <form
+        onSubmit={safeSubmit}
+        className="w-full max-w-md p-8 bg-white/80 backdrop-blur-md shadow-lg rounded-lg space-y-6 border border-gray-200"
+      >
+        <div className="text-center">
+          <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
+            Crie sua conta
+          </h2>
+          <p className="text-sm text-gray-600 mt-2">
+            Cadastre-se para acessar nossas funcionalidades exclusivas.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <InputField
+            id="first_name"
+            type="text"
+            name="Name"
+            value={formData.Name}
+            onChange={handleChange}
+            placeholder="Digite seu nome"
+            icon={AiOutlineUser}
+          />
+          <InputField
+            id="email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Digite seu e-mail"
+            icon={AiOutlineMail}
+          />
+          <InputField
+            id="password"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Digite sua senha"
+            icon={AiOutlineLock}
+          />
+          <InputField
+            id="confirm_password"
+            type="password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            placeholder="Confirme sua senha"
+            icon={AiOutlineLock}
+          />
+
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="terms"
+              checked={formData.agree}
+              onChange={handleCheckboxChange}
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              required
+            />
+            <label htmlFor="terms" className="ml-2 text-sm text-gray-700">
+              Concordo com os{" "}
+              <a href="#" className="text-blue-600 hover:underline">
+                termos e condições
+              </a>
+              .
+            </label>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-gradient-to-r from-pastel-blue to-mint text-gray-900 font-bold rounded-full py-3 shadow-xl transition-transform duration-300 focus:ring-2 focus:ring-blue-300 hover:scale-105"
+        >
+          Criar Conta
+        </button>
+
+        <button
+          type="button"
+          onClick={handleBack}
+          className="w-full mt-2 bg-gradient-to-r from-red-500 to-red-700 text-brack font-bold rounded-full py-3 shadow-xl transition-transform duration-300 focus:ring-2 focus:ring-red-300 hover:scale-105"
+        >
+          Voltar
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default Form;

@@ -2,6 +2,7 @@
 
 import Header from '../../components/Header/Header'
 import Rodape from '../../components/Rodape/Rodape'
+import Link from 'next/link'
 
 const Contato = () => {
   const user = { name: 'Kelly Faustino' }
@@ -87,12 +88,12 @@ const Contato = () => {
             <p className="text-lg text-dark-300 leading-relaxed tracking-wide">
               Você também pode nos encontrar nas redes sociais ou enviar um
               e-mail diretamente para{' '}
-              <a
+              <Link
                 href="mailto:contato@isabellafmoura.com"
                 className="text-bella-100 hover:underline"
               >
                 IsabellaFaustino@gmail.com
-              </a>
+              </Link>
             </p>
             <div className="text-center mt-8"></div>
           </section>

@@ -1,7 +1,7 @@
-import data from '../../../articles.json'
-import Article from '../../components/Article/Article'
+import data from '../../../artigos.json'
+import Article from '../DestaqueArtigo/DestaqueArtigo'
 
-const ArticleList = () => {
+const ListaDeArtigos = () => {
   return (
     <div className="mt-5 sm:mt-0 grid gap-5 m-auto max-w-2xl sm:grid-cols-2 lg:grid-cold-3 lg:max-w-[1000px]">
       {data.map((props, index) => (
@@ -11,4 +11,4 @@ const ArticleList = () => {
   )
 }
 
-export default ArticleList
+export default ListaDeArtigos

@@ -1,106 +1,9 @@
-// import React, { useState } from "react";
-
-// const LoginForm = ({ onLogin }) => {
-//   const [formData, setFormData] = useState({
-//     email: "",
-//     password: "",
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prevData) => ({ ...prevData, [name]: value }));
-//   };
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     const { email, password } = formData;
-
-//     if (email === "kellykelinha_86@hotmail.com" && password === "123") {
-//       onLogin({ email });
-//     } else {
-//       alert("Credenciais inválidas!");
-//     }
-//   };
-
-//   return (
-//     <div className="h-screen flex justify-center items-center bg-gray-50">
-//       <form
-//         onSubmit={handleSubmit}
-//         className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg space-y-6"
-//       >
-//         <div className="text-center">
-//           <h2 className="text-2xl font-semibold text-gray-800">Faça o seu login</h2>
-//           <p className="text-sm text-gray-500 mt-2">
-//             Acesse sua conta para acompanhar todas novidades.
-//           </p>
-//         </div>
-
-//         <div className="mb-4">
-//           <label
-//             htmlFor="email"
-//             className="block text-sm font-medium text-gray-700 mb-2"
-//           >
-//             Endereço de e-mail
-//           </label>
-//           <input
-//             type="email"
-//             id="email"
-//             name="email"
-//             value={formData.email}
-//             onChange={handleChange}
-//             className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:ring-2 focus:ring-blue-500"
-//             placeholder="Digite seu e-mail"
-//             required
-//           />
-//         </div>
-
-//         <div className="mb-4">
-//           <label
-//             htmlFor="password"
-//             className="block text-sm font-medium text-gray-700 mb-2"
-//           >
-//             Senha
-//           </label>
-//           <input
-//             type="password"
-//             id="password"
-//             name="password"
-//             value={formData.password}
-//             onChange={handleChange}
-//             className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:ring-2 focus:ring-blue-500"
-//             placeholder="Digite sua senha"
-//             required
-//           />
-//         </div>
-
-//         <button
-//           type="submit"
-//           className="w-full bg-blue-600 text-white font-medium rounded-lg py-2.5 text-center hover:bg-blue-700 focus:ring-2 focus:ring-blue-500"
-//         >
-//           Entrar
-//         </button>
-
-//         <div className="mt-4 text-center text-sm text-blue-600">
-//           <a href="#" className="hover:underline">
-//             Esqueceu a senha? Clique aqui
-//           </a>
-//         </div>
-//         <div className="text-center text-sm text-gray-700 mt-2">
-//           <span>Não possui uma conta? </span>
-//           <a href="#" className="text-blue-600 hover:underline">
-//             Cadastre-se agora!
-//           </a>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default LoginForm;
-
-import React, { useState } from 'react'
-import Image from 'next/image'
-import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai'
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
+import Form from '../Form/Form';
+import Link from 'next/link';
+import Alert from '../Alerta/Alerta';
 
 const InputField = ({
   id,
@@ -137,38 +40,43 @@ const InputField = ({
       />
     </div>
   </div>
-)
+);
 
 const LoginForm = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-  })
-  const [loading, setLoading] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [successMessage, setSuccessMessage] = useState(null)
+  });
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [showForm, setShowForm] = useState('login');
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prevData) => ({ ...prevData, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    setLoading(true)
-    setErrorMessage(null)
+    event.preventDefault();
+    setLoading(true);
+    setErrorMessage(null);
 
     setTimeout(() => {
-      const { email, password } = formData
-      if (email === 'kellykelinha_86@hotmail.com' && password === '123') {
-        setSuccessMessage('Login realizado com sucesso!')
-        onLogin({ email })
-        setTimeout(() => setSuccessMessage(null), 3000)
+      const { email, password } = formData;
+      if (email === 'kellykelinha_86@hotmail.com' && password === '123') {        
+        setSuccessMessage('Login realizado com sucesso!');
+        onLogin({ email });
+        setTimeout(() => setSuccessMessage(null), 3000);
       } else {
-        setErrorMessage('Credenciais inválidas!')
+        setErrorMessage('Credenciais inválidas!');
       }
-      setLoading(false)
-    }, 1500)
+      setLoading(false);
+    }, 1500);
+  };
+
+  if (showForm === 'register') {
+    return <Form />;
   }
 
   return (
@@ -178,7 +86,7 @@ const LoginForm = ({ onLogin }) => {
         <div className="absolute bottom-5 right-20 w-52 h-52 bg-gradient-to-br from-pastel-blue to-lavender opacity-30 blur-2xl animate-pulse-slow"></div>
       </div>
 
-      <div className="flex flex-col lg:flex-row w-full max-w-6xl bg-white/80 backdrop-blur-md shadow-lg rounded-3xl overflow-hidden border border-gray-200 animate-slide-in">
+      <div className="flex flex-col lg:flex-row w-full max-w-6xl bg-white/80 backdrop-blur-md shadow-lg rounded-3xl overflow-hidden border border-gray-200 animate-slide-in z-10">
         <div className="lg:w-1/2 relative overflow-hidden">
           <Image
             src="/Bella.jpg"
@@ -203,10 +111,20 @@ const LoginForm = ({ onLogin }) => {
             </div>
 
             {errorMessage && (
-              <p className="text-red-500 text-center">{errorMessage}</p>
+              <Alert
+                type="error"
+                message={errorMessage}
+                onClose={() => setErrorMessage(null)}
+                customClass="fixed top-5 right-5 z-50"
+              />
             )}
             {successMessage && (
-              <p className="text-green-500 text-center">{successMessage}</p>
+              <Alert
+                type="success"
+                message={successMessage}
+                onClose={() => setSuccessMessage(null)}
+                customClass="fixed top-5 right-5 z-50"
+              />
             )}
 
             <InputField
@@ -256,18 +174,19 @@ const LoginForm = ({ onLogin }) => {
             </div>
             <div className="text-center text-sm text-gray-500 mt-2">
               <span>Não possui uma conta? </span>
-              <a
-                href="#"
+              <Link
+                href="/cadastro"
                 className="text-blue-400 hover:underline hover:text-blue-600 transition-all"
+                onClick={() => setShowForm('register')}
               >
                 Cadastre-se agora!
-              </a>
+              </Link>
             </div>
           </form>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;
