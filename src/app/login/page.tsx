@@ -1,18 +1,24 @@
-'use client'
-import LoginForm from '@/components/Login/Login'
-import { useState } from 'react'
-import Home from '../home/page'
+"use client";
+
+import LoginForm from "@/components/login/login";
+import { useState } from "react";
+import Home from "../home/page";
+
+type User = {
+  email: string;
+};
 
 const Login = () => {
-  const [user, setUser] = useState(null)
-  const hasUser = Boolean(user)
+  const [user, setUser] = useState<User | null>(null);
+
+  const hasUser = Boolean(user);
 
   return (
     <div className="h-screen">
       {!hasUser && <LoginForm onLogin={setUser} />}
       {hasUser && <Home />}
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
