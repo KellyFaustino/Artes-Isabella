@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Exposição de Artes - Isabella Faustino
 
-## Getting Started
+Aplicação web desenvolvida com **Next.js** para exibição de artes, com sistema de autenticação, galeria dinâmica e suporte a tema claro/escuro.
 
-First, run the development server:
+---
+
+## Funcionalidades
+
+- Login de usuário
+- Cadastro de conta
+- Esqueceu Senha
+- Alternância de tema (Dark / Light)
+- Galeria de artes
+- Carrossel de imagens
+- Destaque de artigos
+- Layout responsivo
+- Contato
+- Política de Privacidade
+- Sobre
+
+---
+
+## Tecnologias utilizadas
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- Heroicons / React Icons
+- API interna (`/api/artigos`)
+
+---
+
+## Como rodar o projeto
+
+Clone o repositório:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/KellyFaustino/Artes-Isabella.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse a pasta:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd Artes-Isabella
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Instale as dependências:
 
-## Learn More
+```bash
+yarn
+```
 
-To learn more about Next.js, take a look at the following resources:
+Execute o projeto:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+yarn dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Acesse no navegador:
 
-## Deploy on Vercel
+```bash
+http://localhost:3000
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Estrutura do projeto
+
+```bash
+src/
+ ├── app/
+ │    ├── login/
+ │    ├── cadastro/
+ │    ├── home/
+ │
+ ├── components/
+ │    ├── login/
+ │    ├── form/
+ │    ├── header/
+ │    ├── carrossel/
+ │    ├── destaque-artigo/
+ │    ├── alerta/
+ │    └── ToggleTheme/
+```
+
+---
+
+## Tema Dark/Light
+
+O projeto possui alternância de tema utilizando Tailwind CSS e manipulação da classe `dark` no HTML.
+
+---
+
+## Deploy
+
+Você pode publicar facilmente usando:
+
+https://vercel.com
+
+---
+
+## Desenvolvido por
+
+Kelly Faustino 💙

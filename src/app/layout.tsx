@@ -1,19 +1,28 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from "next";
+import { Open_Sans as OpenSans } from "next/font/google";
+
+import "./globals.css";
+
+const openSans = OpenSans({
+  display: "swap",
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
-  title: 'Exposição Quadros Isabella',
-  description: 'Obras de arte da Isabella',
-}
+  title: "Exposição de Artes",
+  description: "Site de exposição de artes",
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-      <body className={'bg-gray-100 dark:bg-dark-100'}>{children}</body>
+    <html lang="pt-BR">
+      <body className={`${openSans.variable} min-h-screen`}>{children}</body>
     </html>
-  )
+  );
 }
